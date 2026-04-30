@@ -45,7 +45,7 @@ const LoveScroll = () => {
       {opened && !muted && (
         <iframe
           style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "1px", height: "1px" }}
-          src="https://www.youtube.com/embed/AzaTyxMduH4?autoplay=1&start=46&loop=1&playlist=AzaTyxMduH4"
+          src="https://www.youtube.com/embed/wje9miHeV5g?autoplay=1&start=5&loop=1&playlist=wje9miHeV5g"
           allow="autoplay"
           aria-hidden
         />
