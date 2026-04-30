@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Heart, Volume2, VolumeX } from "lucide-react";
+
+const MUSIC_SRC = "/audio/love-piano.mp3";
 
 const messageLines = [
   "Mouhamadou Mansour Kholle —",
@@ -24,6 +26,7 @@ const LoveScroll = () => {
   const [opened, setOpened] = useState(false);
   const [revealText, setRevealText] = useState(false);
   const [muted, setMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (!opened) return;
@@ -31,25 +34,40 @@ const LoveScroll = () => {
     return () => clearTimeout(t);
   }, [opened]);
 
+  useEffect(() => {
+    const a = audioRef.current;
+    if (!a) return;
+    a.volume = 0.35;
+    if (muted) {
+      a.pause();
+    } else if (opened) {
+      a.play().catch((err) => console.warn("Audio play failed:", err));
+    }
+  }, [opened, muted]);
+
   const handleOpen = () => {
     if (opened) return;
     setOpened(true);
     setMuted(false);
+    const a = audioRef.current;
+    if (a) {
+      a.volume = 0.35;
+      a.play().catch((err) => console.warn("Audio play failed:", err));
+    }
   };
 
-  const toggleMute = () => setMuted((m) => !m);
+  const toggleMute = () => {
+    const next = !muted;
+    setMuted(next);
+    const a = audioRef.current;
+    if (a && !next) {
+      a.play().catch((err) => console.warn("Audio play failed:", err));
+    }
+  };
 
   return (
     <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 py-16">
-      {/* Hidden YouTube iframe */}
-      {opened && !muted && (
-        <iframe
-          style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "1px", height: "1px" }}
-          src="https://www.youtube.com/embed/wje9miHeV5g?autoplay=1&start=5&loop=1&playlist=wje9miHeV5g"
-          allow="autoplay"
-          aria-hidden
-        />
-      )}
+      <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" />
 
       {/* Music toggle */}
       <button
