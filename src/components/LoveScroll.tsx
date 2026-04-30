@@ -105,11 +105,11 @@ const LoveScroll = () => {
           opened ? "-translate-y-2 opacity-60" : "opacity-100"
         }`}
       >
-        <p className="font-body text-sm uppercase tracking-[0.4em] text-[hsl(var(--ink)/0.55)] animate-title">
+        <p className="font-body text-sm uppercase tracking-[0.7em] text-[hsl(var(--ink)/0.60)] animate-title">
           A mon cher Somitsu💋
         </p>
         <h1 className="font-display mt-3 text-5xl text-[hsl(var(--ink))] sm:text-6xl animate-fade-up">
-          From your Kinishi❤️;
+          From your Kinishi ❤️
         </h1>
       </header>
 
