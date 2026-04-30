@@ -4,22 +4,42 @@ import { Heart, Volume2, VolumeX } from "lucide-react";
 const MUSIC_SRC = "/parchment/audio/love-piano.mp3";
 
 const messageLines = [
-  "Mouhamadou Mansour Kholle —",
-  "my Somitsu, my heart, my home.",
+  "Aujourd'hui, ça fait trois ans.",
   "",
-  "Three years ago, on the first of May,",
-  "the world quietly rearranged itself around you,",
-  "and I became, forever, your Kinishi.",
+  "Trois ans que tu es entièrement entré dans ma vie, sans que je réalise",
+  "à quel point tu allais y laisser une empreinte importante.",
+  "Avec le temps, tu es devenu bien plus qu'une présence…",
+  "tu es devenu un repère, un apaisement, une évidence silencieuse.",
   "",
-  "You are my softest morning and my safest night,",
-  "the small smile I keep when no one is looking,",
-  "the reason ordinary days feel like poetry.",
+  "Je repense parfois à notre début, à ce que nous étions à ce moment-là,",
+  "et je vois tout le chemin qu'on a parcouru. On a grandi, on a appris,",
+  "on s'est parfois cherchés, parfois trouvés,",
+  "mais on est toujours restés là, l'un pour l'autre.",
+  "Et c'est peut-être ça, le plus précieux.",
   "",
-  "Three years, and still — every time you look at me,",
-  "my heart finds itself all over again.",
+  "Je ne crois pas à l'amour parfait.",
+  "Mais je crois à celui qui évolue, qui résiste, qui s'adapte,",
+  "qui se construit jour après jour. Et avec toi, j'ai compris",
+  "que l'amour, ce n'est pas seulement ce qu'on ressent dans les beaux jours…",
+  "c'est aussi ce qu'on choisit de préserver dans les moments plus fragiles.",
   "",
-  "Happy anniversary, my love.",
-  "May 1st, 2026.",
+  "Tu fais partie de mes habitudes, de mes pensées, de mes silences aussi.",
+  "Et sans même t'en rendre compte,",
+  "tu es devenu une partie de mon équilibre.",
+  "",
+  "Merci pour ta patience, ta présence, tes efforts,",
+  "et même pour les petites imperfections qui font de nous ce que nous sommes.",
+  "Rien n'est parfait, mais tout est vrai.",
+  "Et pour moi, c'est ce qui compte le plus.",
+  "",
+  "Aujourd'hui, je ne célèbre pas seulement trois années passées à tes côtés…",
+  "je célèbre tout ce qu'on est devenu ensemble,",
+  "et tout ce qu'on n'a pas encore vécu",
+  "mais que j'espère encore découvrir avec toi.",
+  "",
+  "Peu importe le chemin, je suis heureuse qu'il soit avec toi.",
+  "Happy Us",
+  "Happy Anniversary sama mansour"
 ];
 
 const LoveScroll = () => {
@@ -86,10 +106,10 @@ const LoveScroll = () => {
         }`}
       >
         <p className="font-body text-sm uppercase tracking-[0.4em] text-[hsl(var(--ink)/0.55)] animate-title">
-          For Somitsu — 3 years, May 1st 2026
+          A mon cher Somitsu💋
         </p>
         <h1 className="font-display mt-3 text-5xl text-[hsl(var(--ink))] sm:text-6xl animate-fade-up">
-          From your Kinishi&hellip;
+          From your Kinishi❤️;
         </h1>
       </header>
 
@@ -173,7 +193,7 @@ const LoveScroll = () => {
               onClick={handleOpen}
               className="group relative overflow-hidden rounded-full border border-[hsl(var(--gold)/0.6)] bg-[hsl(var(--parchment-light))] px-8 py-3 font-body text-base tracking-wide text-[hsl(var(--ink))] shadow-[0_8px_24px_hsl(25_40%_20%/0.25)] transition hover:bg-[hsl(var(--parchment))] hover:shadow-[0_10px_30px_hsl(25_40%_20%/0.35)]"
             >
-              <span className="relative z-10">Unroll the letter</span>
+              <span className="relative z-10">Derouler🫠</span>
               <span
                 aria-hidden
                 className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-[hsl(var(--glow)/0.6)] to-transparent transition-transform duration-700 group-hover:translate-x-full"
