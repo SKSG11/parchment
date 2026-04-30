@@ -39,14 +39,14 @@ const LoveScroll = () => {
     if (document.getElementById("yt-script")) return;
     const s = document.createElement("script");
     s.id = "yt-script";
-    s.src = "https://www.youtube.com/AzaTyxMduH4";
+    s.src = "https://www.youtube.com/iframe_api";
     document.head.appendChild(s);
     window.onYouTubeIframeAPIReady = () => {
       const div = document.createElement("div");
       ytDiv.current?.appendChild(div);
       playerRef.current = new window.YT.Player(div, {
-        videoId: "ZH4tDHMIHmo",
-        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: "ZH4tDHMIHmo", start: 9 },
+        videoId: "AzaTyxMduH4",
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: "AzaTyxMduH4", start: 9 },
         events: { onReady: (e: any) => e.target.setVolume(35) },
       });
     };
