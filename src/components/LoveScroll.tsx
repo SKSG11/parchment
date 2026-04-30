@@ -1,12 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Heart, Volume2, VolumeX } from "lucide-react";
-
-declare global {
-  interface Window {
-    YT: any;
-    onYouTubeIframeAPIReady: () => void;
-  }
-}
 
 const messageLines = [
   "Mouhamadou Mansour Kholle —",
@@ -31,26 +24,6 @@ const LoveScroll = () => {
   const [opened, setOpened] = useState(false);
   const [revealText, setRevealText] = useState(false);
   const [muted, setMuted] = useState(true);
-  const playerRef = useRef<any>(null);
-  const ytDiv = useRef<HTMLDivElement>(null);
-
-  // Load YouTube API and create hidden player
-  useEffect(() => {
-    if (document.getElementById("yt-script")) return;
-    const s = document.createElement("script");
-    s.id = "yt-script";
-    s.src = "https://www.youtube.com/iframe_api";
-    document.head.appendChild(s);
-    window.onYouTubeIframeAPIReady = () => {
-      const div = document.createElement("div");
-      ytDiv.current?.appendChild(div);
-      playerRef.current = new window.YT.Player(div, {
-        videoId: "AzaTyxMduH4",
-        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: "AzaTyxMduH4", start: 9 },
-        events: { onReady: (e: any) => e.target.setVolume(35) },
-      });
-    };
-  }, []);
 
   useEffect(() => {
     if (!opened) return;
@@ -58,28 +31,25 @@ const LoveScroll = () => {
     return () => clearTimeout(t);
   }, [opened]);
 
-  useEffect(() => {
-    if (muted) playerRef.current?.pauseVideo();
-    else if (opened) playerRef.current?.playVideo();
-  }, [opened, muted]);
-
   const handleOpen = () => {
     if (opened) return;
     setOpened(true);
     setMuted(false);
-    setTimeout(() => playerRef.current?.playVideo(), 500);
   };
 
   const toggleMute = () => setMuted((m) => !m);
 
   return (
     <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 py-16">
-      {/* Hidden YouTube player */}
-      <div
-        ref={ytDiv}
-        aria-hidden
-        style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "1px", height: "1px" }}
-      />
+      {/* Hidden YouTube iframe */}
+      {opened && !muted && (
+        <iframe
+          style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "1px", height: "1px" }}
+          src="https://www.youtube.com/embed/AzaTyxMduH4?autoplay=1&start=9&loop=1&playlist=AzaTyxMduH4"
+          allow="autoplay"
+          aria-hidden
+        />
+      )}
 
       {/* Music toggle */}
       <button
@@ -107,21 +77,17 @@ const LoveScroll = () => {
 
       {/* Scroll */}
       <div className="relative w-full max-w-[560px]">
-        {/* Soft glow halo */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[120%] w-[120%] -translate-x-1/2 -translate-y-1/2 rounded-full"
           style={{
-            background:
-              "radial-gradient(closest-side, hsl(var(--glow) / 0.55), transparent 70%)",
+            background: "radial-gradient(closest-side, hsl(var(--glow) / 0.55), transparent 70%)",
             filter: "blur(20px)",
           }}
         />
 
-        {/* Top roller */}
         <div className="roller relative mx-auto h-7 w-[105%] -translate-x-[2.5%] rounded-full" />
 
-        {/* Parchment that unrolls */}
         <div
           className="relative mx-auto overflow-hidden glow-soft"
           style={{
@@ -181,10 +147,8 @@ const LoveScroll = () => {
           <div className="parchment-edge-bottom" />
         </div>
 
-        {/* Bottom roller */}
         <div className="roller relative mx-auto h-7 w-[105%] -translate-x-[2.5%] rounded-full animate-bob" />
 
-        {/* Open button */}
         {!opened && (
           <div className="mt-10 flex justify-center">
             <button
