@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Heart, Volume2, VolumeX } from "lucide-react";
 
-const MUSIC_SRC = "/audio/love-piano.mp3";
+const MUSIC_SRC = "/parchment/audio/love-piano.mp3";
 
 const messageLines = [
   "Mouhamadou Mansour Kholle —",
