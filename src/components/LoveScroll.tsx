@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Heart, Volume2, VolumeX } from "lucide-react";
 
-const MUSIC_SRC = "/audio/love-piano.mp3";
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady: () => void;
+  }
+}
 
 const messageLines = [
   "Mouhamadou Mansour Kholle —",
@@ -26,7 +31,26 @@ const LoveScroll = () => {
   const [opened, setOpened] = useState(false);
   const [revealText, setRevealText] = useState(false);
   const [muted, setMuted] = useState(true);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playerRef = useRef<any>(null);
+  const ytDiv = useRef<HTMLDivElement>(null);
+
+  // Load YouTube API and create hidden player
+  useEffect(() => {
+    if (document.getElementById("yt-script")) return;
+    const s = document.createElement("script");
+    s.id = "yt-script";
+    s.src = "https://www.youtube.com/AzaTyxMduH4";
+    document.head.appendChild(s);
+    window.onYouTubeIframeAPIReady = () => {
+      const div = document.createElement("div");
+      ytDiv.current?.appendChild(div);
+      playerRef.current = new window.YT.Player(div, {
+        videoId: "ZH4tDHMIHmo",
+        playerVars: { autoplay: 0, controls: 0, loop: 1, playlist: "ZH4tDHMIHmo", start: 9 },
+        events: { onReady: (e: any) => e.target.setVolume(35) },
+      });
+    };
+  }, []);
 
   useEffect(() => {
     if (!opened) return;
@@ -35,40 +59,27 @@ const LoveScroll = () => {
   }, [opened]);
 
   useEffect(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    a.volume = 0.35;
-    if (muted) {
-      a.pause();
-    } else if (opened) {
-      a.play().catch((err) => console.warn("Audio play failed:", err));
-    }
+    if (muted) playerRef.current?.pauseVideo();
+    else if (opened) playerRef.current?.playVideo();
   }, [opened, muted]);
 
   const handleOpen = () => {
     if (opened) return;
     setOpened(true);
     setMuted(false);
-    // Start audio synchronously inside the user gesture for max reliability
-    const a = audioRef.current;
-    if (a) {
-      a.volume = 0.35;
-      a.play().catch((err) => console.warn("Audio play failed:", err));
-    }
+    setTimeout(() => playerRef.current?.playVideo(), 500);
   };
 
-  const toggleMute = () => {
-    const next = !muted;
-    setMuted(next);
-    const a = audioRef.current;
-    if (a && !next) {
-      a.play().catch((err) => console.warn("Audio play failed:", err));
-    }
-  };
+  const toggleMute = () => setMuted((m) => !m);
 
   return (
     <section className="relative z-10 flex min-h-screen w-full flex-col items-center justify-center px-4 py-16">
-      <audio ref={audioRef} src={MUSIC_SRC} loop preload="auto" />
+      {/* Hidden YouTube player */}
+      <div
+        ref={ytDiv}
+        aria-hidden
+        style={{ position: "fixed", top: "-9999px", left: "-9999px", width: "1px", height: "1px" }}
+      />
 
       {/* Music toggle */}
       <button
