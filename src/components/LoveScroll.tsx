@@ -130,7 +130,7 @@ const LoveScroll = () => {
           className="relative mx-auto overflow-hidden glow-soft"
           style={{
             width: "100%",
-            maxHeight: opened ? "1400px" : "0px",
+            maxHeight: opened ? "3000px" : "0px",
             transition: "max-height 2.6s cubic-bezier(0.22, 0.85, 0.25, 1)",
           }}
         >
